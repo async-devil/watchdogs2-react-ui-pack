@@ -1,0 +1,71 @@
+extends:
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  - "plugin:import/recommended"
+  - "plugin:import/typescript"
+  - "plugin:react/recommended"
+  - "plugin:react-hooks/recommended"
+  - prettier
+  - airbnb-typescript
+  - "plugin:sonarjs/recommended"
+  - "plugin:promise/recommended"
+
+ignorePatterns:
+  - "lib/"
+
+rules:
+  jsx-quotes:
+    - warn
+    - prefer-double
+
+  # Imports grouping and sorting feature
+  import/order:
+    - warn
+    - groups:
+        - builtin
+        - external
+        - internal
+        - - parent
+          - sibling
+
+      pathGroups:
+        - pattern: react
+          group: external
+          position: before
+
+      pathGroupsExcludedImportTypes:
+        - react
+
+      newlines-between: always
+
+      alphabetize:
+        order: asc
+        caseInsensitive: true
+
+  # Disables errors caused by Windows or Linux styles
+  linebreak-style: off
+
+  # Just to allow using tabs
+  no-tabs: off
+  react/jsx-indent: off
+  react/jsx-indent-props: off
+  "@typescript-eslint/indent": off
+
+  # Double quotes whitelist
+  "@typescript-eslint/quotes": off
+
+plugins:
+  - "@typescript-eslint"
+  - import
+  - react
+  - react-hooks
+  - prettier
+  - sonarjs
+  - promise
+
+parser: "@typescript-eslint/parser"
+parserOptions:
+  project: tsconfig.json
+  tsconfigRootDir: .

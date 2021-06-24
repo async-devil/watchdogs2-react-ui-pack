@@ -1,0 +1,11 @@
+node_modules/
+.vscode/
+
+# Eslint and prettier config files
+*.yaml
+
+README.md
+.gitignore
+
+# Typescript source directory
+src/
