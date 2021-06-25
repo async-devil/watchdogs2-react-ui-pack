@@ -2,8 +2,14 @@
   "name": "watchdogs2-react-ui-pack",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
-  "exports": "./src/index.js",
+  "main": "./lib/index.js",
+  "author": "async-devil",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "UI",
+    "React-UI",
+    "Watchdogs2"
+  ],
   "scripts": {
     "build": "rm -rf ./lib && npx tsc && node ./utils/uglify.js",
     "lint": "eslint -c .eslintrc.yaml ./src/",
@@ -13,13 +19,6 @@
     "type": "git",
     "url": "git+https://github.com/async-devil/watchdogs2-react-ui-pack.git"
   },
-  "keywords": [
-    "UI",
-    "React-UI",
-    "Watchdogs2"
-  ],
-  "author": "async-devil",
-  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/async-devil/watchdogs2-react-ui-pack/issues"
   },
