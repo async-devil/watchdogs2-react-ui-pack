@@ -1,11 +1,11 @@
+# Unnecessary directories
 node_modules/
 .vscode/
+utils/
+src/
 
 # Eslint and prettier config files
 *.yaml
 
 README.md
 .gitignore
-
-# Typescript source directory
-src/
