@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./lib/index.js",
+  "type": "module",
   "author": "async-devil",
   "license": "GPL-3.0-or-later",
   "keywords": [
