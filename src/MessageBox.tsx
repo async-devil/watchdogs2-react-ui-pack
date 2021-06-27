@@ -2,14 +2,14 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-const MessageBoxBlock = styled.div`
+const MessageBoxBlock = styled.div<{ fontName: string }>`
 	max-width: 37.5rem;
 
 	margin: 1.2rem;
 
-	background-color: #000b;
+	background-color: #000;
 
-	font-family: "Pexico-micro", monospace;
+	font-family: "${(props) => props.fontName}", monospace;
 	font-size: 1.1rem;
 	color: #f5f5f5;
 
@@ -73,11 +73,15 @@ const MessageBoxBlock = styled.div`
 	}
 `;
 
-const MessageBox = (props: { title: string; children: JSX.Element }): JSX.Element => {
-	const { title, children } = props;
+const MessageBox = (props: {
+	title: string;
+	fontName?: string;
+	children: JSX.Element;
+}): JSX.Element => {
+	const { title, fontName, children } = props;
 
 	return (
-		<MessageBoxBlock className="message-box">
+		<MessageBoxBlock fontName={fontName || "Pexico-Micro"} className="message-box">
 			<div className="message-box_title">{title}</div>
 			<div className="message-box_top">
 				<svg
