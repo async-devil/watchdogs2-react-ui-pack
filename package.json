@@ -16,6 +16,14 @@
     "lint": "eslint -c .eslintrc.yaml ./src/",
     "prepare": "npm run lint && npm run build"
   },
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
+  "workspaces": [
+    "demo/test-env"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/async-devil/watchdogs2-react-ui-pack.git"
