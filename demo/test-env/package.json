@@ -1,0 +1,128 @@
+{
+  "name": "react-app-template-ts",
+  "version": "1.0.0",
+  "description": "Custom react-app ts template with styled-componenets and prettier",
+  "main": "src/index.tsx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/async-devil/react-app-template-ts.git"
+  },
+  "author": "async-devil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/async-devil/react-app-template-ts/issues"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "styled-components": "^5.2.3",
+    "web-vitals": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@types/node": "^12.20.7",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/styled-components": "^5.1.9",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.5.4",
+    "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "copy-lib": "rm -rf node_modules/lib && cp -r ../../lib node_modules/lib"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "prettier"
+    ],
+    "rules": {
+      "jsx-quotes": [
+        1,
+        "prefer-double"
+      ]
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "useTabs": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "jsxBracketSameLine": false,
+    "parser": "babel-ts",
+    "semi": true,
+    "overrides": [
+      {
+        "files": "*.css",
+        "options": {
+          "parser": "css"
+        }
+      }
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/index.tsx",
+      "!src/serviceWorker.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "./src/*/*.types.{ts,tsx}",
+      "./src/index.tsx",
+      "./src/serviceWorker.ts"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary",
+      "clover"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 95,
+        "branches": 95,
+        "lines": 95,
+        "functions": 95
+      }
+    },
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "src/(.*)$": "<rootDir>/src/$1"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
