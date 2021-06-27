@@ -39,7 +39,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "copy-lib": "rm -rf node_modules/lib && cp -r ../../lib node_modules/lib"
+    "copy-lib": "rm -rf node_modules/lib && cp -r ../../lib node_modules/lib",
+    "copy-UI": "rm -rf src/UI && cp -r ../../src src/UI",
+    "export-UI": "rm -rf ../../src && cp -r src/UI ../../src"
   },
   "eslintConfig": {
     "extends": [
