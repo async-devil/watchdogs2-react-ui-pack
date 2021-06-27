@@ -1,14 +1,10 @@
 extends:
   - "eslint:recommended"
-  - "plugin:@typescript-eslint/eslint-recommended"
-  - "plugin:@typescript-eslint/recommended"
-  - "plugin:@typescript-eslint/recommended-requiring-type-checking"
   - "plugin:import/recommended"
   - "plugin:import/typescript"
   - "plugin:react/recommended"
   - "plugin:react-hooks/recommended"
   - prettier
-  - airbnb-typescript
   - "plugin:sonarjs/recommended"
   - "plugin:promise/recommended"
 
@@ -51,15 +47,8 @@ rules:
   no-tabs: off
   react/jsx-indent: off
   react/jsx-indent-props: off
-  "@typescript-eslint/indent": off
-
-  # Double quotes whitelist
-  "@typescript-eslint/quotes": off
-
-  "@typescript-eslint/no-unused-vars": warn
 
 plugins:
-  - "@typescript-eslint"
   - import
   - react
   - react-hooks
@@ -67,12 +56,55 @@ plugins:
   - sonarjs
   - promise
 
-parser: "@typescript-eslint/parser"
-parserOptions:
-  project: tsconfig.json
-  tsconfigRootDir: .
-
 overrides:
+  - files:
+      - "*.ts"
+      - "*.tsx"
+    excludedFiles: "./utils/uglify.js"
+
+    parser: "@typescript-eslint/parser"
+    parserOptions:
+      project: tsconfig.json
+      tsconfigRootDir: .
+
+    extends:
+      - "plugin:@typescript-eslint/eslint-recommended"
+      - "plugin:@typescript-eslint/recommended"
+      - "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      - airbnb-typescript
+
+    plugins:
+      - "@typescript-eslint"
+
+    rules:
+      jsx-quotes:
+        - warn
+        - prefer-double
+      import/order:
+        - warn
+        - groups:
+            - builtin
+            - external
+            - internal
+            - - parent
+              - sibling
+          pathGroups:
+            - pattern: react
+              group: external
+              position: before
+          pathGroupsExcludedImportTypes:
+            - react
+          newlines-between: always
+          alphabetize:
+            order: asc
+            caseInsensitive: true
+      linebreak-style: off
+      no-tabs: off
+      react/jsx-indent: off
+      react/jsx-indent-props: off
+      "@typescript-eslint/indent": off
+      "@typescript-eslint/quotes": off
+      "@typescript-eslint/no-unused-vars": warn
+
   - files: "*.js"
     parser: "@babel/eslint-parser"
-    parserOptions: {}
