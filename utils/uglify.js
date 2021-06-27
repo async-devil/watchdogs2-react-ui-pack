@@ -1,8 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
+
 import uglify from "uglify-js";
 
 //? Does not work with regular __dirname
+// eslint-disable-next-line no-undef
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const PATH_TO_LIB = path.join(__dirname, "../lib");
 
