@@ -2,17 +2,17 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-const ButtonBlock = styled.button`
+const ButtonBlock = styled.button<{ fontName: string }>`
 	width: auto;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
-	background-color: #000b;
+	background-color: #000;
 	color: #f5f5f5;
 
-	font-family: "Pexico-micro", monospace;
+	font-family: "${(props) => props.fontName}", monospace;
 	line-height: 1.5rem;
 	font-size: 1.3rem;
 
@@ -37,9 +37,21 @@ const ButtonBlock = styled.button`
 	}
 `;
 
-const Button = (props: { children: JSX.Element | string }): JSX.Element => {
-	const { children } = props;
-	return <ButtonBlock className="button">{children}</ButtonBlock>;
+const Button = (props: {
+	event: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+	fontName?: string;
+	children: JSX.Element | string;
+}): JSX.Element => {
+	const { event, fontName, children } = props;
+	return (
+		<ButtonBlock
+			fontName={fontName || "Pexico-Micro"}
+			className="button"
+			onClick={(ev) => event(ev)}
+		>
+			{children}
+		</ButtonBlock>
+	);
 };
 
 export default Button;
