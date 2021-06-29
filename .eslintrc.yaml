@@ -47,6 +47,12 @@ rules:
   no-tabs: off
   react/jsx-indent: off
   react/jsx-indent-props: off
+  object-curly-newline: off
+  react/no-array-index-key: off
+  react/require-default-props: off
+  implicit-arrow-linebreak: off
+  operator-linebreak: off
+  "@typescript-eslint/comma-dangle": off
 
 plugins:
   - import
@@ -102,6 +108,13 @@ overrides:
       no-tabs: off
       react/jsx-indent: off
       react/jsx-indent-props: off
+      object-curly-newline: off
+      react/no-array-index-key: off
+      react/require-default-props: off
+      implicit-arrow-linebreak: off
+      operator-linebreak: off
+      jsx-a11y/click-events-have-key-events: off
+      "@typescript-eslint/comma-dangle": off
       "@typescript-eslint/indent": off
       "@typescript-eslint/quotes": off
       "@typescript-eslint/no-unused-vars": warn
