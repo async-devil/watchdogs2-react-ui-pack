@@ -162,7 +162,12 @@ const TrackBar = (props: {
 				</div>
 				<div className="track-bar__bar_container">
 					<span className="track-bar__bar__brackets">[</span>
-					<div className="track-bar__bar__active" onClick={(ev) => onClick(ev)}>
+					<div
+						className="track-bar__bar__active"
+						onClick={(ev) => onClick(ev)}
+						role="button"
+						tabIndex={0}
+					>
 						{hyphens}
 					</div>
 					<span className="track-bar__bar__brackets">]</span>
