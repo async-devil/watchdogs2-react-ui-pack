@@ -13,9 +13,10 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 	color: #00fe00;
 
 	font-family: "${(props) => props.fontName}", monospace;
+	font-size: 2rem;
 
 	& > div {
-		height: 1.5rem;
+		height: 2.3rem;
 
 		margin: auto 0 auto 0;
 	}
@@ -36,6 +37,13 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 				color: #000;
 			}
 
+			.track-bar__bar__active {
+				position: relative;
+				top: 2px;
+
+				letter-spacing: 0.2rem;
+			}
+
 			.track-bar__bar__hyphen {
 				cursor: pointer;
 			}
@@ -47,11 +55,11 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 		}
 
 		.arrow_top {
-			bottom: 0.625rem;
+			bottom: 0.4rem;
 		}
 
 		.arrow_bottom {
-			top: 0.5rem;
+			top: 0.55rem;
 			transform: rotateX(180deg);
 		}
 	}
@@ -120,7 +128,7 @@ const TrackBar = (props: {
 	}, [percent]);
 
 	return (
-		<TrackBarBlock fontName={fontName || "Pexico-Micro"} className="track-bar">
+		<TrackBarBlock fontName={fontName || "PixelUnicode"} className="track-bar">
 			<div className="track-bar__percent">
 				<span>{percent}</span>
 				<span style={{ marginLeft: "5px" }}>%</span>
@@ -128,8 +136,7 @@ const TrackBar = (props: {
 			<div className="track-bar__bar">
 				<div
 					className="track-bar__bar__arrow arrow_top"
-					// ? 79 = percent width + bracket width
-					style={{ left: `${selctedHyphenCenterX - 79}px` }}
+					style={{ left: `${selctedHyphenCenterX - 81}px` }}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 300 300">
 						<path
@@ -174,7 +181,7 @@ const TrackBar = (props: {
 				</div>
 				<div
 					className="track-bar__bar__arrow arrow_bottom"
-					style={{ left: `${selctedHyphenCenterX - 79}px` }}
+					style={{ left: `${selctedHyphenCenterX - 81}px` }}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 300 300">
 						<path
