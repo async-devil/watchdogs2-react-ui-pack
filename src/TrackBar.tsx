@@ -71,11 +71,11 @@ type Options = {
 };
 
 const TrackBar = (props: {
-	event: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, percent: number) => void;
+	clickEvent: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, percent: number) => void;
 	options?: Options;
 	fontName?: string;
 }): JSX.Element => {
-	const { event, fontName } = props;
+	const { clickEvent, fontName } = props;
 	const config = {
 		defaultPercent: 0,
 		numberOfHyphens: 21,
@@ -104,11 +104,11 @@ const TrackBar = (props: {
 
 	const [selctedHyphenCenterX, setCenterX] = useState(0);
 
-	const onClick = (clickEvent: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		const rect = clickEvent.currentTarget.getBoundingClientRect();
+	const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		const rect = event.currentTarget.getBoundingClientRect();
 
 		const { x, width } = rect;
-		const { clientX } = clickEvent;
+		const { clientX } = event;
 
 		const xDelta = clientX - x;
 		const newPercent = Math.floor(
@@ -116,7 +116,7 @@ const TrackBar = (props: {
 				(100 / (config.numberOfHyphens - 1))
 		);
 
-		event(clickEvent, newPercent);
+		clickEvent(event, newPercent);
 		setPercent(newPercent);
 	};
 
