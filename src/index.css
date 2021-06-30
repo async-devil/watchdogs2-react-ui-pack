@@ -1,0 +1,5 @@
+@font-face {
+	font-family: "PixelUnicode";
+	src: local("PixelUnicode"), url("./fonts/PixelUnicode/PixelUnicode.ttf") format("truetype");
+	font-weight: bold;
+}
