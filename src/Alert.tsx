@@ -20,7 +20,10 @@ const AlertBlock = styled.div<{ fontName: string }>`
 		height: 0;
 
 		position: relative;
-		bottom: 1.7rem;
+		bottom: 3.4rem;
+
+		font-size: 3rem;
+		letter-spacing: 0.3rem;
 
 		color: #cccccc;
 		text-align: center;
@@ -37,10 +40,10 @@ const AlertBlock = styled.div<{ fontName: string }>`
 		p {
 			margin: auto;
 
-			font-size: 1.3rem;
+			font-size: 2.5rem;
 
 			@media (max-width: 500px) {
-				font-size: 1rem;
+				font-size: 1.8rem;
 			}
 		}
 	}
@@ -54,7 +57,7 @@ const AlertBlock = styled.div<{ fontName: string }>`
 		margin-bottom: 1rem;
 
 		.alert__main-block__text {
-			font-size: 0.95rem;
+			font-size: 1.6rem;
 			text-align: center;
 		}
 
@@ -72,6 +75,7 @@ const AlertBlock = styled.div<{ fontName: string }>`
 
 			margin-bottom: 0.3rem;
 
+			font-size: 2rem;
 			background-color: #000;
 			color: #fff;
 
@@ -96,7 +100,7 @@ const Alert = (props: {
 	title: string;
 	options: {
 		text: string;
-		event: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+		clickEvent: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	}[];
 	fontName?: string;
 	children: JSX.Element;
@@ -108,7 +112,7 @@ const Alert = (props: {
 			<button
 				className="alert__button"
 				type="button"
-				onClick={(event) => option.event(event)}
+				onClick={(event) => option.clickEvent(event)}
 				key={`alert__button_${index}`}
 			>
 				{option.text}
@@ -117,7 +121,7 @@ const Alert = (props: {
 	);
 
 	return (
-		<AlertBlock className="alert" fontName={fontName || "Pexico-Micro"}>
+		<AlertBlock className="alert" fontName={fontName || "PixelUnicode"}>
 			<p className="alert__top-dots">...</p>
 			<div className="alert__title">
 				<p className="alert__title_text">{title}</p>
