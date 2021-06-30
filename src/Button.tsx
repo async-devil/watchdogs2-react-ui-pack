@@ -13,22 +13,23 @@ const ButtonBlock = styled.button<{ fontName: string }>`
 	color: #f5f5f5;
 
 	font-family: "${(props) => props.fontName}", monospace;
-	line-height: 1.5rem;
-	font-size: 1.3rem;
+	font-size: 2rem;
+	line-height: 2rem;
 
 	border: none;
 
-	padding: 0.3rem 3rem 0.5rem 0.4rem;
-	margin-bottom: 1rem;
+	padding: 0.3rem 4rem 0.5rem 0.4rem;
+	margin: 1rem 0 1rem 0;
 
-	transition: padding 0.15s cubic-bezier(0.79, 0.14, 0.15, 0.86),
-		margin 0.15s cubic-bezier(0.79, 0.14, 0.15, 0.86);
+	&:first-child:hover {
+		margin: 0.5rem 0 -0.45rem 0;
+	}
 
 	&:hover {
 		background-color: #0f0ce3;
 
-		padding: 0.7rem 3rem 0.9rem 0.4rem;
-		margin-bottom: 0.2rem;
+		padding: 0.875rem 1.75rem 0.875rem 0.4rem;
+		margin: -0.5rem 0 -0.45rem 0;
 
 		&:before {
 			content: "//";
@@ -38,16 +39,16 @@ const ButtonBlock = styled.button<{ fontName: string }>`
 `;
 
 const Button = (props: {
-	event: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+	clickEvent: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	fontName?: string;
 	children: JSX.Element | string;
 }): JSX.Element => {
-	const { event, fontName, children } = props;
+	const { clickEvent, fontName, children } = props;
 	return (
 		<ButtonBlock
-			fontName={fontName || "Pexico-Micro"}
+			fontName={fontName || "PixelUnicode"}
 			className="button"
-			onClick={(ev) => event(ev)}
+			onClick={(event) => clickEvent(event)}
 		>
 			{children}
 		</ButtonBlock>
