@@ -27,7 +27,7 @@ const ProgressBarBlock = styled.div`
 	}
 `;
 
-const ProgressBar = (props: { percent: number }) => {
+const ProgressBar = (props: { percent: number }): JSX.Element => {
 	const { percent } = props;
 
 	const [foregroundWidth, setForegroundWidth] = React.useState(0);
