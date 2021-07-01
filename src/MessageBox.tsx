@@ -10,26 +10,29 @@ const MessageBoxBlock = styled.div<{ fontName: string }>`
 	background-color: #000;
 
 	font-family: "${(props) => props.fontName}", monospace;
-	font-size: 1.1rem;
+	font-size: 1.5rem;
 	color: #f5f5f5;
 
 	.message-box_title {
 		width: inherit;
 		height: 0;
-		position: relative;
 
-		top: 11px;
+		position: relative;
+		top: 0.9rem;
 
 		text-align: center;
+		font-size: 1.7rem;
 	}
 
 	.message-box_top {
 		display: flex;
 
 		width: inherit;
-		position: relative;
 
+		position: relative;
 		top: 0.25rem;
+
+		padding-top: 0.6rem;
 
 		svg {
 			position: relative;
@@ -38,7 +41,7 @@ const MessageBoxBlock = styled.div<{ fontName: string }>`
 
 	.message-box_top__middle {
 		width: calc(100% - 122px);
-		height: 25px;
+		height: 1.56rem;
 
 		border-top: 5px solid #808080;
 		border-bottom: 5px solid #808080;
@@ -58,8 +61,9 @@ const MessageBoxBlock = styled.div<{ fontName: string }>`
 
 	ul {
 		list-style: none;
-		margin-left: 0;
-		padding-left: 0;
+
+		margin: 0;
+		padding: 0;
 	}
 
 	li {
@@ -69,7 +73,7 @@ const MessageBoxBlock = styled.div<{ fontName: string }>`
 
 	li:before {
 		content: "-";
-		padding-right: 10px;
+		padding-right: 0.625rem;
 	}
 `;
 
@@ -81,7 +85,7 @@ const MessageBox = (props: {
 	const { title, fontName, children } = props;
 
 	return (
-		<MessageBoxBlock fontName={fontName || "Pexico-Micro"} className="message-box">
+		<MessageBoxBlock fontName={fontName || "PixelUnicode"} className="message-box">
 			<div className="message-box_title">{title}</div>
 			<div className="message-box_top">
 				<svg
