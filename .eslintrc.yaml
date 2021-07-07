@@ -40,10 +40,8 @@ rules:
         order: asc
         caseInsensitive: true
 
-  # Disables errors caused by Windows or Linux styles
+  no-nested-ternary: off
   linebreak-style: off
-
-  # Just to allow using tabs
   no-tabs: off
   react/jsx-indent: off
   react/jsx-indent-props: off
@@ -104,6 +102,8 @@ overrides:
           alphabetize:
             order: asc
             caseInsensitive: true
+
+      no-nested-ternary: off
       linebreak-style: off
       no-tabs: off
       react/jsx-indent: off
