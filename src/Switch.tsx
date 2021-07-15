@@ -66,20 +66,20 @@ const Switch = (props: {
 		]
 	);
 
-	const indicators = [...optionsList].map((option) => {
-		return (
-			<button
-				className="switch__indicator"
-				key={`indicator_${option.index}`}
-				onClick={(clickEvent) => {
-					const selectedOption = optionsList[option.index];
+	const indicators = [...optionsList].map((option) => (
+		<button
+			className="switch__indicator"
+			key={`indicator_${option.index}`}
+			onClick={(clickEvent) => {
+				const selectedOption = optionsList[option.index];
 
-					selectEvent(clickEvent, selectedOption);
-					setOption(selectedOption);
-				}}
-			/>
-		);
-	});
+				selectEvent(clickEvent, selectedOption);
+				setOption(selectedOption);
+			}}
+			type="button"
+			aria-label={`${option.index}`}
+		/>
+	));
 
 	return (
 		<SwitchBlock fontName={fontName || "PixelUnicode"} className="switch">
