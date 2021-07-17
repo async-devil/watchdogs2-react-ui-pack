@@ -3,6 +3,8 @@ import * as React from "react";
 import styled from "styled-components";
 
 const SwitchBlock = styled.div<{ fontName: string }>`
+	width: min-content;
+
 	font-family: "${(props) => props.fontName}", monospace;
 	font-size: 2rem;
 
@@ -13,24 +15,31 @@ const SwitchBlock = styled.div<{ fontName: string }>`
 
 const SwitchOption = styled.p<{ color: string }>`
 	color: ${(props) => props.color};
+
+	margin: 1px 0.5rem 0 0.5rem;
 `;
 
 const SwitchArrow = styled.button`
 	background: none;
-	color: ${(props) => (props.disabled ? "#f5f5f5" : "#00fe1e")};
+	color: #f5f5f5;
 	border: none;
 
 	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 `;
 
 const SwitchIndicatorsContainer = styled.div<{ selectedIndex: number }>`
-	height: 0.8rem;
+	height: 1rem;
+
+	display: flex;
+
+	margin-left: 31px;
 
 	button {
-		width: 0.6rem;
-		height: 0.5rem;
+		width: 7px;
+		height: 6px;
 
-		margin: 0.2rem 0.3rem 0.2rem 0.3rem;
+		padding: 0;
+		margin: 0 0.3rem 0.2rem 0.3rem;
 
 		background-color: #000;
 		border: none;
@@ -77,7 +86,7 @@ const Switch = (props: {
 				setOption(selectedOption);
 			}}
 			type="button"
-			aria-label={`${option.index}`}
+			aria-label={`${option.index + 1}`}
 		/>
 	));
 
