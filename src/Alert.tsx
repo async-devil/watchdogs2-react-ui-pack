@@ -65,7 +65,7 @@ const AlertBlock = styled.div<{ fontName: string }>`
 			width: 100%;
 			position: absolute;
 
-			bottom: 0px;
+			bottom: 3rem;
 			right: 0px;
 		}
 
