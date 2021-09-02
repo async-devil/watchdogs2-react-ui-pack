@@ -59,7 +59,29 @@ const AlertBlock = styled.div<{ fontName: string }>`
 
 		.alert__main-block__text {
 			font-size: 1.6rem;
+
 			text-align: center;
+
+			h1 {
+				font-size: 2rem;
+			}
+
+			ul {
+				list-style: none;
+
+				margin: 0;
+				padding: 0;
+			}
+
+			li {
+				padding-left: 1em;
+				text-indent: -1em;
+			}
+
+			li:before {
+				content: "-";
+				padding-right: 0.625rem;
+			}
 		}
 
 		.alert__main-block__buttons {
