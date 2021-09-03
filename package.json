@@ -14,7 +14,8 @@
   "scripts": {
     "build": "rm -rf ./lib && npx tsc",
     "lint": "eslint -c .eslintrc.yaml ./src/",
-    "prepare": "npm run lint && npm run build"
+    "prepare": "npm run lint && npm run build",
+    "test-env": "cd ./demo/test-env && npm run start"
   },
   "files": [
     "lib/",
