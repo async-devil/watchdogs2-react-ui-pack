@@ -2,8 +2,8 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-const SwitchBlock = styled.div<{ fontName: string }>`
-	width: min-content;
+const SwitchBlock = styled.div<{ fontName: string; defaultWidth: number | undefined }>`
+	width: ${(props) => (props.defaultWidth ? `${props.defaultWidth}px` : "min-content")};
 
 	font-family: "${(props) => props.fontName}", monospace;
 	font-size: 2rem;
@@ -16,7 +16,7 @@ const SwitchBlock = styled.div<{ fontName: string }>`
 const SwitchOption = styled.p<{ color: string }>`
 	color: ${(props) => props.color};
 
-	margin: 1px 0.5rem 0 0.5rem;
+	margin: 1px auto 0 auto;
 `;
 
 const SwitchArrow = styled.button`
@@ -29,10 +29,11 @@ const SwitchArrow = styled.button`
 
 const SwitchIndicatorsContainer = styled.div<{ selectedIndex: number }>`
 	height: 1rem;
+	width: fit-content;
 
 	display: flex;
 
-	margin-left: 31px;
+	margin: 0 auto 0 auto;
 
 	button {
 		width: 7px;
@@ -52,6 +53,13 @@ const SwitchIndicatorsContainer = styled.div<{ selectedIndex: number }>`
 	}
 `;
 
+function returnValidColorOrUndefined(color: string | undefined): string | undefined {
+	// ? Regex test without strict sharp check
+	if (!color || !/^#?(?:[0-9a-fA-F]{3}){1,2}$/.test(color)) return undefined;
+
+	return color.charAt(0) === "#" ? color : `#${color}`;
+}
+
 const Switch = (props: {
 	options: { text: string; hexColor?: string }[];
 	selectEvent: (
@@ -60,12 +68,17 @@ const Switch = (props: {
 	) => void;
 	fontName?: string;
 	defaultIndex?: number;
+	defaultPixelWidth?: number;
 }): JSX.Element => {
-	const { defaultIndex, options, selectEvent, fontName } = props;
+	const { defaultIndex, defaultPixelWidth, options, selectEvent, fontName } = props;
 
-	// ? index assigning for active property selection
+	// ? index assigning and color validating for active property selection
 	const optionsList: { text: string; hexColor?: string; index: number }[] = [...options].map(
-		(option, index) => Object.assign(option, { index })
+		(option, index) =>
+			Object.assign(option, {
+				index,
+				hexColor: returnValidColorOrUndefined(option.hexColor),
+			})
 	);
 
 	const [currentOption, setOption] = React.useState(
@@ -91,7 +104,11 @@ const Switch = (props: {
 	));
 
 	return (
-		<SwitchBlock fontName={fontName || "PixelUnicode"} className="switch">
+		<SwitchBlock
+			fontName={fontName || "PixelUnicode"}
+			defaultWidth={defaultPixelWidth}
+			className="switch"
+		>
 			<div className="switch__main-container">
 				<SwitchArrow
 					className="switch__arrow_left"
