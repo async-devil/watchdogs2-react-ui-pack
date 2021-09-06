@@ -27,11 +27,15 @@ const SwitchArrow = styled.button`
 	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 `;
 
-const SwitchIndicatorsContainer = styled.div<{ selectedIndex: number; haveWidth: boolean }>`
+const SwitchIndicatorsContainer = styled.div<{
+	selectedIndex: number;
+	haveWidth: boolean;
+	disabled: boolean;
+}>`
 	height: 1rem;
 	width: fit-content;
 
-	display: flex;
+	display: ${(props) => (props.disabled ? "none" : "flex")};
 
 	margin: ${(props) => (props.haveWidth ? "0 auto 0 auto" : "0 0 0 1.5rem")};
 
@@ -69,8 +73,10 @@ const Switch = (props: {
 	fontName?: string;
 	defaultIndex?: number;
 	defaultPixelWidth?: number;
+	disableIndicators?: boolean;
 }): JSX.Element => {
-	const { defaultIndex, defaultPixelWidth, options, selectEvent, fontName } = props;
+	const { defaultIndex, defaultPixelWidth, disableIndicators, options, selectEvent, fontName } =
+		props;
 
 	// ? index assigning and color validating for active property selection
 	const optionsList: { text: string; hexColor?: string; index: number }[] = [...options].map(
@@ -145,6 +151,7 @@ const Switch = (props: {
 			<SwitchIndicatorsContainer
 				selectedIndex={currentOption.index}
 				haveWidth={!!defaultPixelWidth}
+				disabled={!!disableIndicators}
 				className="switch__indicators-container"
 			>
 				{indicators}
