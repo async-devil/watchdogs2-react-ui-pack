@@ -2,8 +2,8 @@ import * as React from "react";
 
 import styled from "styled-components";
 
-const SwitchBlock = styled.div<{ fontName: string; defaultWidth: number | undefined }>`
-	width: ${(props) => (props.defaultWidth ? `${props.defaultWidth}px` : "min-content")};
+const SwitchBlock = styled.div<{ fontName: string; defaultWidth: string | undefined }>`
+	width: ${(props) => (props.defaultWidth ? props.defaultWidth : "min-content")};
 
 	font-family: "${(props) => props.fontName}", monospace;
 	font-size: 2rem;
@@ -64,6 +64,12 @@ function returnValidColorOrUndefined(color: string | undefined): string | undefi
 	return color.charAt(0) === "#" ? color : `#${color}`;
 }
 
+function returnValidWidthOrUndefined(width: string | undefined): string | undefined {
+	// ? CSS units test
+	if (!width || !/(\d*\.?\d+)\s?(px|em|ex|%|in|cn|mm|pt|pc|rem+)/.test(width)) return undefined;
+	return width;
+}
+
 const Switch = (props: {
 	options: { text: string; hexColor?: string }[];
 	selectEvent: (
@@ -72,10 +78,10 @@ const Switch = (props: {
 	) => void;
 	fontName?: string;
 	defaultIndex?: number;
-	defaultPixelWidth?: number;
+	defaultCSSWidth?: string;
 	disableIndicators?: boolean;
 }): JSX.Element => {
-	const { defaultIndex, defaultPixelWidth, disableIndicators, options, selectEvent, fontName } =
+	const { defaultIndex, defaultCSSWidth, disableIndicators, options, selectEvent, fontName } =
 		props;
 
 	// ? index assigning and color validating for active property selection
@@ -112,7 +118,7 @@ const Switch = (props: {
 	return (
 		<SwitchBlock
 			fontName={fontName || "PixelUnicode"}
-			defaultWidth={defaultPixelWidth}
+			defaultWidth={returnValidWidthOrUndefined(defaultCSSWidth)}
 			className="switch"
 		>
 			<div className="switch__main-container">
@@ -150,7 +156,7 @@ const Switch = (props: {
 			</div>
 			<SwitchIndicatorsContainer
 				selectedIndex={currentOption.index}
-				haveWidth={!!defaultPixelWidth}
+				haveWidth={!!returnValidWidthOrUndefined(defaultCSSWidth)}
 				disabled={!!disableIndicators}
 				className="switch__indicators-container"
 			>
