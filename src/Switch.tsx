@@ -27,13 +27,13 @@ const SwitchArrow = styled.button`
 	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 `;
 
-const SwitchIndicatorsContainer = styled.div<{ selectedIndex: number }>`
+const SwitchIndicatorsContainer = styled.div<{ selectedIndex: number; haveWidth: boolean }>`
 	height: 1rem;
 	width: fit-content;
 
 	display: flex;
 
-	margin: 0 auto 0 auto;
+	margin: ${(props) => (props.haveWidth ? "0 auto 0 auto" : "0 0 0 1.5rem")};
 
 	button {
 		width: 7px;
@@ -144,6 +144,7 @@ const Switch = (props: {
 			</div>
 			<SwitchIndicatorsContainer
 				selectedIndex={currentOption.index}
+				haveWidth={!!defaultPixelWidth}
 				className="switch__indicators-container"
 			>
 				{indicators}
