@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const AlertBlock = styled.div<{ fontName: string }>`
 	max-width: 55rem;
-	height: 25rem;
+	min-height: 25rem;
 
 	background-color: #202020;
 	color: #f5f5f5;
@@ -21,6 +21,7 @@ const AlertBlock = styled.div<{ fontName: string }>`
 
 		position: relative;
 		bottom: 3.4rem;
+		left: 4px;
 
 		font-size: 3rem;
 		letter-spacing: 0.3rem;
@@ -49,7 +50,7 @@ const AlertBlock = styled.div<{ fontName: string }>`
 	}
 
 	.alert__main-block {
-		height: 19.5rem;
+		min-height: 19.5rem;
 
 		position: relative;
 
@@ -58,15 +59,37 @@ const AlertBlock = styled.div<{ fontName: string }>`
 
 		.alert__main-block__text {
 			font-size: 1.6rem;
+
 			text-align: center;
+
+			h1 {
+				font-size: 2rem;
+			}
+
+			ul {
+				list-style: none;
+
+				margin: 0;
+				padding: 0;
+			}
+
+			li {
+				padding-left: 1em;
+				text-indent: -1em;
+			}
+
+			li:before {
+				content: "-";
+				padding-right: 0.625rem;
+			}
 		}
 
 		.alert__main-block__buttons {
 			width: 100%;
-			position: absolute;
+			position: relative;
 
-			bottom: 0px;
-			right: 0px;
+			margin-top: 2rem;
+			margin-bottom: 1rem;
 		}
 
 		.alert__button {
@@ -103,7 +126,7 @@ const Alert = (props: {
 		clickEvent: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 	}[];
 	fontName?: string;
-	children: JSX.Element;
+	children?: JSX.Element;
 }): JSX.Element => {
 	const { title, options, fontName, children } = props;
 
