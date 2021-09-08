@@ -38,29 +38,42 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 			}
 
 			.track-bar__bar__active {
+				display: flex;
+
 				position: relative;
 				top: 2px;
-
-				letter-spacing: 0.2rem;
 			}
 
 			.track-bar__bar__hyphen {
+				margin: 0 0.175rem;
+
 				cursor: pointer;
+
+				svg {
+					margin: 50% 0;
+				}
+
+				rect {
+					fill: lime;
+				}
 			}
 		}
 
 		.track-bar__bar__arrow {
 			height: 0;
 			position: relative;
+
+			path {
+				fill: #fff;
+			}
 		}
 
 		.arrow_top {
-			bottom: 0.4rem;
+			bottom: 0.9rem;
 		}
 
 		.arrow_bottom {
-			top: 0.55rem;
-			transform: rotateX(180deg);
+			bottom: 1.7rem;
 		}
 	}
 `;
@@ -94,7 +107,9 @@ const TrackBar = (props: {
 	for (let i = 0; i < config.numberOfHyphens; i += 1) {
 		hyphens.push(
 			<span className="track-bar__bar__hyphen" key={`hyphen_${i}`}>
-				-
+				<svg xmlns="http://www.w3.org/2000/svg" width="11" height="2" viewBox="0 0 11 2">
+					<rect width="11" height="2" />
+				</svg>
 			</span>
 		);
 	}
@@ -136,35 +151,10 @@ const TrackBar = (props: {
 			<div className="track-bar__bar">
 				<div
 					className="track-bar__bar__arrow arrow_top"
-					style={{ left: `${selctedHyphenCenterX - 81}px` }}
+					style={{ left: `${selctedHyphenCenterX - 82}px` }}
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 300 300">
-						<path
-							fill="white"
-							stroke="white"
-							strokeWidth="1"
-							d="M 33.00,84.00
-           C 33.00,84.00 79.00,84.00 79.00,84.00
-             79.00,84.00 79.00,128.00 79.00,128.00
-             79.00,128.00 124.00,128.00 124.00,128.00
-             124.00,128.00 124.00,173.00 124.00,173.00
-             124.00,173.00 168.00,173.00 168.00,173.00
-             168.00,173.00 168.00,129.00 168.00,129.00
-             168.00,129.00 213.00,129.00 213.00,129.00
-             213.00,129.00 213.00,84.00 213.00,84.00
-             213.00,84.00 259.00,84.00 259.00,84.00
-             259.00,84.00 259.00,130.00 259.00,130.00
-             259.00,130.00 214.00,130.00 214.00,130.00
-             214.00,130.00 214.00,175.00 214.00,175.00
-             214.00,175.00 169.00,175.00 169.00,175.00
-             169.00,175.00 169.00,219.00 169.00,219.00
-             169.00,219.00 123.00,219.00 123.00,219.00
-             123.00,219.00 123.00,174.00 123.00,174.00
-             123.00,174.00 79.00,174.00 79.00,174.00
-             79.00,174.00 79.00,130.00 79.00,130.00
-             79.00,130.00 33.00,130.00 33.00,130.00
-             33.00,130.00 33.00,84.00 33.00,84.00 Z"
-						/>
+					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9">
+						<path d="M0,0H3V3H0V0ZM12,0h3V3H12V0ZM3,3H6V6H3V3ZM9,3h3V6H9V3ZM6,6H9V9H6V6Z" />
 					</svg>
 				</div>
 				<div className="track-bar__bar_container">
@@ -189,35 +179,10 @@ const TrackBar = (props: {
 				</div>
 				<div
 					className="track-bar__bar__arrow arrow_bottom"
-					style={{ left: `${selctedHyphenCenterX - 81}px` }}
+					style={{ left: `${selctedHyphenCenterX - 82}px` }}
 				>
-					<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 300 300">
-						<path
-							fill="white"
-							stroke="white"
-							strokeWidth="1"
-							d="M 33.00,84.00
-           C 33.00,84.00 79.00,84.00 79.00,84.00
-             79.00,84.00 79.00,128.00 79.00,128.00
-             79.00,128.00 124.00,128.00 124.00,128.00
-             124.00,128.00 124.00,173.00 124.00,173.00
-             124.00,173.00 168.00,173.00 168.00,173.00
-             168.00,173.00 168.00,129.00 168.00,129.00
-             168.00,129.00 213.00,129.00 213.00,129.00
-             213.00,129.00 213.00,84.00 213.00,84.00
-             213.00,84.00 259.00,84.00 259.00,84.00
-             259.00,84.00 259.00,130.00 259.00,130.00
-             259.00,130.00 214.00,130.00 214.00,130.00
-             214.00,130.00 214.00,175.00 214.00,175.00
-             214.00,175.00 169.00,175.00 169.00,175.00
-             169.00,175.00 169.00,219.00 169.00,219.00
-             169.00,219.00 123.00,219.00 123.00,219.00
-             123.00,219.00 123.00,174.00 123.00,174.00
-             123.00,174.00 79.00,174.00 79.00,174.00
-             79.00,174.00 79.00,130.00 79.00,130.00
-             79.00,130.00 33.00,130.00 33.00,130.00
-             33.00,130.00 33.00,84.00 33.00,84.00 Z"
-						/>
+					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9">
+						<path d="M6,0H9V3H6V0ZM3,3H6V6H3V3ZM9,3h3V6H9V3ZM0,6H3V9H0V6ZM12,6h3V9H12V6Z" />
 					</svg>
 				</div>
 			</div>
