@@ -168,7 +168,11 @@ const TrackBar = (props: {
 					</svg>
 				</div>
 				<div className="track-bar__bar_container">
-					<span className="track-bar__bar__brackets">[</span>
+					<span className="track-bar__bar__brackets">
+						<svg xmlns="http://www.w3.org/2000/svg" width="4" height="21" viewBox="0 0 4 21">
+							<path d="M0,0H4V2H2V19H4v2H0V0Z" />
+						</svg>
+					</span>
 					<div
 						className="track-bar__bar__active"
 						onClick={(ev) => onClick(ev)}
@@ -177,7 +181,11 @@ const TrackBar = (props: {
 					>
 						{hyphens}
 					</div>
-					<span className="track-bar__bar__brackets">]</span>
+					<span className="track-bar__bar__brackets">
+						<svg xmlns="http://www.w3.org/2000/svg" width="4" height="21" viewBox="0 0 4 21">
+							<path d="M0,0H4V21H0V19H2V2H0V0Z" />
+						</svg>
+					</span>
 				</div>
 				<div
 					className="track-bar__bar__arrow arrow_bottom"
