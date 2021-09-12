@@ -16,8 +16,6 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 	font-size: 2rem;
 
 	& > div {
-		height: 2.3rem;
-
 		margin: auto 0 auto 0;
 	}
 
@@ -34,7 +32,8 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 			display: flex;
 
 			.track-bar__bar__brackets {
-				color: #000;
+				fill: #000;
+				stroke-width: 3px;
 			}
 
 			.track-bar__bar__active {
@@ -49,12 +48,54 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 
 				cursor: pointer;
 
-				svg {
-					margin: 50% 0;
-				}
-
 				rect {
 					fill: lime;
+				}
+			}
+
+			.track-bar__bar_container__input {
+				input {
+					height: 1rem;
+					width: auto;
+
+					background: none;
+				}
+
+				input::-webkit-slider-thumb {
+					background: none;
+					border: none;
+				}
+				input::-moz-range-thumb {
+					background: none;
+					border: none;
+				}
+				input::-ms-thumb {
+					background: none;
+					border: none;
+				}
+
+				input::-webkit-slider-runnable-track {
+					background: none;
+					border: none;
+				}
+				input::-moz-range-track {
+					background: none;
+					border: none;
+				}
+				input::-ms-track {
+					background: none;
+					border: none;
+				}
+
+				.track-bar__bar_container__hyphens {
+					position: absolute;
+
+					height: 2px;
+
+					svg {
+						height: inherit;
+						width: 11px;
+					}
 				}
 			}
 		}
@@ -107,7 +148,7 @@ const TrackBar = (props: {
 	for (let i = 0; i < config.numberOfHyphens; i += 1) {
 		hyphens.push(
 			<span className="track-bar__bar__hyphen" key={`hyphen_${i}`}>
-				<svg xmlns="http://www.w3.org/2000/svg" width="11" height="2" viewBox="0 0 11 2">
+				<svg xmlns="http://www.w3.org/2000/svg">
 					<rect width="11" height="2" />
 				</svg>
 			</span>
@@ -119,28 +160,28 @@ const TrackBar = (props: {
 
 	const [selctedHyphenCenterX, setCenterX] = useState(0);
 
-	const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		const rect = event.currentTarget.getBoundingClientRect();
+	// const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+	// 	const rect = event.currentTarget.getBoundingClientRect();
 
-		const { x, width } = rect;
-		const { clientX } = event;
+	// 	const { x, width } = rect;
+	// 	const { clientX } = event;
 
-		const xDelta = clientX - x;
-		const newPercent = Math.floor(
-			getNumberOfHyphenByPercent(Math.round(xDelta / (width / 100)), config.numberOfHyphens) *
-				(100 / (config.numberOfHyphens - 1))
-		);
+	// 	const xDelta = clientX - x;
+	// 	const newPercent = Math.floor(
+	// 		getNumberOfHyphenByPercent(Math.round(xDelta / (width / 100)), config.numberOfHyphens) *
+	// 			(100 / (config.numberOfHyphens - 1))
+	// 	);
 
-		clickEvent(event, newPercent);
-		setPercent(newPercent);
-	};
+	// 	clickEvent(event, newPercent);
+	// 	setPercent(newPercent);
+	// };
 
-	React.useEffect(() => {
-		const hyphenList = document.getElementsByClassName("track-bar__bar__hyphen");
-		const selectedHyphen = hyphenList[getNumberOfHyphenByPercent(percent, hyphenList.length - 1)];
+	// React.useEffect(() => {
+	// 	const hyphenList = document.getElementsByClassName("track-bar__bar__hyphen");
+	// 	const selectedHyphen = hyphenList[getNumberOfHyphenByPercent(percent, hyphenList.length - 1)];
 
-		setCenterX(getCenterByRect(selectedHyphen.getBoundingClientRect()));
-	}, [percent]);
+	// 	setCenterX(getCenterByRect(selectedHyphen.getBoundingClientRect()));
+	// }, [percent]);
 
 	return (
 		<TrackBarBlock fontName={fontName || "PixelUnicode"} className="track-bar">
@@ -149,10 +190,7 @@ const TrackBar = (props: {
 				<span style={{ marginLeft: "5px" }}>%</span>
 			</div>
 			<div className="track-bar__bar">
-				<div
-					className="track-bar__bar__arrow arrow_top"
-					style={{ left: `${selctedHyphenCenterX - 82}px` }}
-				>
+				<div className="track-bar__bar__arrow arrow_top">
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9">
 						<path d="M0,0H3V3H0V0ZM12,0h3V3H12V0ZM3,3H6V6H3V3ZM9,3h3V6H9V3ZM6,6H9V9H6V6Z" />
 					</svg>
@@ -163,13 +201,17 @@ const TrackBar = (props: {
 							<path d="M0,0H4V2H2V19H4v2H0V0Z" />
 						</svg>
 					</span>
-					<div
-						className="track-bar__bar__active"
-						onClick={(ev) => onClick(ev)}
-						role="button"
-						tabIndex={0}
-					>
-						{hyphens}
+					<div className="track-bar__bar_container__input">
+						<div className="track-bar__bar_container__hyphens">{hyphens}</div>
+						<input
+							type="range"
+							min="1"
+							max="100"
+							value={percent}
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+								setPercent(parseInt(event.target.value, 10))
+							}
+						/>
 					</div>
 					<span className="track-bar__bar__brackets">
 						<svg xmlns="http://www.w3.org/2000/svg" width="4" height="21" viewBox="0 0 4 21">
@@ -177,10 +219,7 @@ const TrackBar = (props: {
 						</svg>
 					</span>
 				</div>
-				<div
-					className="track-bar__bar__arrow arrow_bottom"
-					style={{ left: `${selctedHyphenCenterX - 82}px` }}
-				>
+				<div className="track-bar__bar__arrow arrow_bottom">
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9">
 						<path d="M6,0H9V3H6V0ZM3,3H6V6H3V3ZM9,3h3V6H9V3ZM0,6H3V9H0V6ZM12,6h3V9H12V6Z" />
 					</svg>
