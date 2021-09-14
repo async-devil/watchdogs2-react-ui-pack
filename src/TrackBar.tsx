@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const TrackBarBlock = styled.div<{ fontName: string }>`
 	height: 3rem;
-	width: min-content;
+	width: fit-content;
 
 	display: flex;
 
@@ -31,6 +31,8 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 		.track-bar__bar_container {
 			display: flex;
 
+			margin-right: 1rem;
+
 			.track-bar__bar__brackets {
 				fill: #000;
 				stroke-width: 3px;
@@ -54,9 +56,11 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 			}
 
 			.track-bar__bar_container__input {
+				width: fit-content;
+
 				input {
+					position: relative;
 					height: 1rem;
-					width: auto;
 
 					background: none;
 				}
@@ -88,9 +92,13 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 				}
 
 				.track-bar__bar_container__hyphens {
-					position: absolute;
-
+					position: relative;
 					height: 2px;
+					width: fit-content;
+
+					top: 15px;
+
+					pointer-events: none;
 
 					svg {
 						height: inherit;
@@ -110,11 +118,11 @@ const TrackBarBlock = styled.div<{ fontName: string }>`
 		}
 
 		.arrow_top {
-			bottom: 0.9rem;
+			bottom: 16px;
 		}
 
 		.arrow_bottom {
-			bottom: 1.7rem;
+			bottom: 33.5px;
 		}
 	}
 `;
@@ -125,11 +133,11 @@ type Options = {
 };
 
 const TrackBar = (props: {
-	clickEvent: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, percent: number) => void;
+	selectEvent: (event: React.ChangeEvent<HTMLInputElement>, percent: number) => void;
 	options?: Options;
 	fontName?: string;
 }): JSX.Element => {
-	const { clickEvent, fontName } = props;
+	const { selectEvent, fontName } = props;
 	const config = {
 		defaultPercent: 0,
 		numberOfHyphens: 21,
@@ -140,6 +148,7 @@ const TrackBar = (props: {
 	// ? Overrides default config
 	if (options) Object.assign(config, options);
 
+	// ? Percent validation
 	const [percent, setPercent] = useState(
 		config.defaultPercent < 100 && config.defaultPercent > 0 ? config.defaultPercent : 0
 	);
@@ -160,28 +169,26 @@ const TrackBar = (props: {
 
 	const [selctedHyphenCenterX, setCenterX] = useState(0);
 
-	// const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-	// 	const rect = event.currentTarget.getBoundingClientRect();
+	React.useEffect(() => {
+		const hyphenList = document.getElementsByClassName("track-bar__bar__hyphen");
 
-	// 	const { x, width } = rect;
-	// 	const { clientX } = event;
+		const firstHyphen = hyphenList[0];
+		const selectedHyphen = hyphenList[getNumberOfHyphenByPercent(percent, hyphenList.length - 1)];
 
-	// 	const xDelta = clientX - x;
-	// 	const newPercent = Math.floor(
-	// 		getNumberOfHyphenByPercent(Math.round(xDelta / (width / 100)), config.numberOfHyphens) *
-	// 			(100 / (config.numberOfHyphens - 1))
-	// 	);
+		// ? Gets width between first and selected hyphen
+		setCenterX(
+			getCenterByRect(selectedHyphen.getBoundingClientRect()) -
+				getCenterByRect(firstHyphen.getBoundingClientRect())
+		);
+	}, [percent]);
 
-	// 	clickEvent(event, newPercent);
-	// 	setPercent(newPercent);
-	// };
+	const hyphensBlockRef = React.useRef<HTMLDivElement>(null);
+	const [inputBlockWidth, setInputBlockWidth] = React.useState(0);
 
-	// React.useEffect(() => {
-	// 	const hyphenList = document.getElementsByClassName("track-bar__bar__hyphen");
-	// 	const selectedHyphen = hyphenList[getNumberOfHyphenByPercent(percent, hyphenList.length - 1)];
-
-	// 	setCenterX(getCenterByRect(selectedHyphen.getBoundingClientRect()));
-	// }, [percent]);
+	// ? Gets width of hyphens block to set to the input
+	React.useLayoutEffect(() => {
+		setInputBlockWidth(hyphensBlockRef.current?.getBoundingClientRect().width as number);
+	}, []);
 
 	return (
 		<TrackBarBlock fontName={fontName || "PixelUnicode"} className="track-bar">
@@ -190,7 +197,10 @@ const TrackBar = (props: {
 				<span style={{ marginLeft: "5px" }}>%</span>
 			</div>
 			<div className="track-bar__bar">
-				<div className="track-bar__bar__arrow arrow_top">
+				<div
+					className="track-bar__bar__arrow arrow_top"
+					style={{ left: `${selctedHyphenCenterX + 4.5}px` }}
+				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9">
 						<path d="M0,0H3V3H0V0ZM12,0h3V3H12V0ZM3,3H6V6H3V3ZM9,3h3V6H9V3ZM6,6H9V9H6V6Z" />
 					</svg>
@@ -202,15 +212,20 @@ const TrackBar = (props: {
 						</svg>
 					</span>
 					<div className="track-bar__bar_container__input">
-						<div className="track-bar__bar_container__hyphens">{hyphens}</div>
+						<div className="track-bar__bar_container__hyphens" ref={hyphensBlockRef}>
+							{hyphens}
+						</div>
 						<input
 							type="range"
-							min="1"
+							min="0"
 							max="100"
+							step={100 / (config.numberOfHyphens - 1)}
 							value={percent}
-							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-								setPercent(parseInt(event.target.value, 10))
-							}
+							style={{ width: `${inputBlockWidth}px` }}
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+								setPercent(parseInt(event.target.value, 10));
+								selectEvent(event, parseInt(event.target.value, 10));
+							}}
 						/>
 					</div>
 					<span className="track-bar__bar__brackets">
@@ -219,7 +234,10 @@ const TrackBar = (props: {
 						</svg>
 					</span>
 				</div>
-				<div className="track-bar__bar__arrow arrow_bottom">
+				<div
+					className="track-bar__bar__arrow arrow_bottom"
+					style={{ left: `${selctedHyphenCenterX + 4.5}px` }}
+				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="15" height="9" viewBox="0 0 15 9">
 						<path d="M6,0H9V3H6V0ZM3,3H6V6H3V3ZM9,3h3V6H9V3ZM0,6H3V9H0V6ZM12,6h3V9H12V6Z" />
 					</svg>
