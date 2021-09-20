@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/watchdogs2-react-ui-pack/static/css/main.3d89cbdf.chunk.css",
+    "main.js": "/watchdogs2-react-ui-pack/static/js/main.6cc99438.chunk.js",
+    "main.js.map": "/watchdogs2-react-ui-pack/static/js/main.6cc99438.chunk.js.map",
+    "runtime-main.js": "/watchdogs2-react-ui-pack/static/js/runtime-main.7b9ee157.js",
+    "runtime-main.js.map": "/watchdogs2-react-ui-pack/static/js/runtime-main.7b9ee157.js.map",
+    "static/js/2.e8deddcf.chunk.js": "/watchdogs2-react-ui-pack/static/js/2.e8deddcf.chunk.js",
+    "static/js/2.e8deddcf.chunk.js.map": "/watchdogs2-react-ui-pack/static/js/2.e8deddcf.chunk.js.map",
+    "static/js/3.bd42c1f8.chunk.js": "/watchdogs2-react-ui-pack/static/js/3.bd42c1f8.chunk.js",
+    "static/js/3.bd42c1f8.chunk.js.map": "/watchdogs2-react-ui-pack/static/js/3.bd42c1f8.chunk.js.map",
+    "index.html": "/watchdogs2-react-ui-pack/index.html",
+    "static/css/main.3d89cbdf.chunk.css.map": "/watchdogs2-react-ui-pack/static/css/main.3d89cbdf.chunk.css.map",
+    "static/js/2.e8deddcf.chunk.js.LICENSE.txt": "/watchdogs2-react-ui-pack/static/js/2.e8deddcf.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7b9ee157.js",
+    "static/js/2.e8deddcf.chunk.js",
+    "static/css/main.3d89cbdf.chunk.css",
+    "static/js/main.6cc99438.chunk.js"
+  ]
+}
